@@ -162,3 +162,13 @@ main,
 section {
   overflow-x: clip;
 }
+
+.page {
+  background: #f7f2e8;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.cover-page {
+  background: #f7f2e8;
+}

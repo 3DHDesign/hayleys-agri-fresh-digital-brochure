@@ -7,6 +7,7 @@ import QualityStandards from "./pages/QualityStandards";
 import Inquiry from "./pages/Inquiry";
 import Header from "./components/layout/Header";
 import { InquiryProvider } from "./context/InquiryContext";
+import Presentation from "./pages/Presentation";
 import "./App.css";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
            
           <Route path="/horeca-supply" element={<HorecaSupply />} />
           <Route path="/quality-standards" element={<QualityStandards />} />
+          <Route path="/presentation" element={<Presentation />} />
           <Route path="/inquiry" element={<Inquiry />} />
         </Routes>
       </BrowserRouter>

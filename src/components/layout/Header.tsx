@@ -8,6 +8,7 @@ const navLinks = [
  
   { label: "HORECA Supply", path: "/horeca-supply" },
   { label: "Quality Standards", path: "/quality-standards" },
+  { label: "Presentation", path: "/presentation" },
   { label: "Inquiry", path: "/inquiry" },
 ];
 
