@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { FiMenu, FiSearch, FiShoppingBag } from "react-icons/fi";
+import { useInquiry } from "../../context/InquiryContext";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -11,6 +12,8 @@ const navLinks = [
 ];
 
 const Header = () => {
+  const { totalItems } = useInquiry();
+
   return (
     <header className="header-glass fixed left-0 top-0 z-50 w-full">
       <div className="app-container flex h-20 items-center justify-between">
@@ -46,16 +49,31 @@ const Header = () => {
         </nav>
 
         <div className="flex items-center gap-3">
-          <button className="hidden h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/80 transition hover:bg-white/10 md:flex">
+          <button
+            type="button"
+            className="hidden h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/80 transition hover:bg-white/10 md:flex"
+          >
             <FiSearch />
           </button>
 
-          <NavLink to="/inquiry" className="btn-primary hidden !px-5 !py-3 md:flex">
+          <NavLink
+            to="/inquiry"
+            className="btn-primary hidden !px-5 !py-3 md:flex"
+          >
             <FiShoppingBag />
             Inquiry Basket
+
+            {totalItems > 0 && (
+              <span className="grid h-6 w-6 place-items-center rounded-full bg-[#102014] text-xs text-white">
+                {totalItems}
+              </span>
+            )}
           </NavLink>
 
-          <button className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white xl:hidden">
+          <button
+            type="button"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white xl:hidden"
+          >
             <FiMenu />
           </button>
         </div>
