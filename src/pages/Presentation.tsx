@@ -23,18 +23,31 @@ const Presentation = () => {
         </div>
 
         <div className="flex justify-center">
-          <HTMLFlipBook
-            width={560}
-            height={760}
-            size="stretch"
-            minWidth={320}
-            maxWidth={560}
-            minHeight={520}
-            maxHeight={760}
-            showCover={true}
-            mobileScrollSupport={true}
-            className="shadow-[0_30px_100px_rgba(0,0,0,0.45)]"
-          >
+        <HTMLFlipBook
+  width={560}
+  height={760}
+  size="stretch"
+  minWidth={320}
+  maxWidth={560}
+  minHeight={520}
+  maxHeight={760}
+  startPage={0}
+  drawShadow={true}
+  flippingTime={900}
+  usePortrait={true}
+  startZIndex={0}
+  autoSize={true}
+  maxShadowOpacity={0.45}
+  showCover={true}
+  mobileScrollSupport={true}
+  clickEventForward={true}
+  useMouseEvents={true}
+  swipeDistance={30}
+  showPageCorners={true}
+  disableFlipByClick={false}
+  style={{}}
+  className="shadow-[0_30px_100px_rgba(0,0,0,0.45)]"
+>
             <div className="page cover-page">
               <div className="flex h-full flex-col justify-between rounded-2xl bg-[#F7F2E8] p-10">
                 <div>
