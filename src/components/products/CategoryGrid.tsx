@@ -25,14 +25,14 @@ const CategoryGrid = () => {
             </p>
 
             <h2 className="mt-4 max-w-2xl text-[42px] font-black leading-[0.95] tracking-[-0.06em] md:text-[64px]">
-              A premium fresh produce range for modern retail and food service.
+              A premium fresh produce range for Hayleys retail and food service.
             </h2>
 
             <p className="mt-6 max-w-xl text-base leading-8 text-black/60">
               Explore Hayleys Agri Fresh’s complete produce portfolio covering
               vegetables, fruits, herbs, specialty produce, and value-added
-              HORECA packs for supermarkets, hotels, restaurants, and premium
-              buyers.
+              HORECA packs for Hayleys retail expansion, hotels, restaurants,
+              cafés, catering teams, and premium food service customers.
             </p>
 
             <div className="my-8 grid gap-3 sm:grid-cols-3">
@@ -50,7 +50,7 @@ const CategoryGrid = () => {
                   Retail
                 </strong>
                 <span className="mt-1 block text-xs font-bold text-black/50">
-                  Supermarket Ready
+                  Hayleys Network
                 </span>
               </div>
 
