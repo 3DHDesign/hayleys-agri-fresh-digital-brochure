@@ -7,7 +7,9 @@ import type { Product, ProductCategory } from "../types/product";
 import { FiSearch } from "react-icons/fi";
 
 const Products = () => {
-  const [selectedCategory, setSelectedCategory] = useState<ProductCategory | "All">("All");
+  const [selectedCategory, setSelectedCategory] = useState<
+    ProductCategory | "All"
+  >("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [activeProduct, setActiveProduct] = useState<Product | null>(null);
 
@@ -20,7 +22,7 @@ const Products = () => {
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.nutritionHighlights.some((item) =>
-          item.toLowerCase().includes(searchTerm.toLowerCase())
+          item.toLowerCase().includes(searchTerm.toLowerCase()),
         );
 
       return matchesCategory && matchesSearch;
@@ -29,7 +31,7 @@ const Products = () => {
 
   return (
     <>
-      <main className="min-h-screen bg-[#F7F2E8] pt-28 text-[#102014]">
+      <main className="min-h-screen overflow-x-hidden bg-[#F7F2E8] pt-28 text-[#102014]">
         <section className="mx-auto w-full max-w-[1500px] px-6 py-12 lg:px-10">
           <div className="mb-10 flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
             <div>
@@ -54,7 +56,7 @@ const Products = () => {
             </div>
           </div>
 
-          <div className="grid gap-8 xl:grid-cols-[320px_1fr]">
+          <div className="grid min-w-0 gap-8 xl:grid-cols-[320px_minmax(0,1fr)]">
             <aside className="h-fit rounded-[32px] bg-white p-5 shadow-[0_18px_50px_rgba(16,32,20,0.08)] xl:sticky xl:top-28">
               <button
                 type="button"
@@ -72,7 +74,7 @@ const Products = () => {
               <div className="space-y-2">
                 {categories.map((category) => {
                   const count = products.filter(
-                    (product) => product.category === category.title
+                    (product) => product.category === category.title,
                   ).length;
 
                   return (
@@ -94,7 +96,7 @@ const Products = () => {
               </div>
             </aside>
 
-            <div>
+            <div className="min-w-0">
               <div className="mb-5 flex items-center justify-between gap-4">
                 <p className="text-sm font-bold text-black/50">
                   Showing{" "}
@@ -109,7 +111,7 @@ const Products = () => {
                 </p>
               </div>
 
-              <div className="grid gap-5 md:grid-cols-2 2xl:grid-cols-3">
+              <div className="grid min-w-0 gap-5 md:grid-cols-2 2xl:grid-cols-3">
                 {filteredProducts.map((product) => (
                   <ProductCard
                     key={product.id}

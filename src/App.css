@@ -15,22 +15,38 @@
   --container-wide: 1500px;
   --header-height: 80px;
 }
-
 html {
   scroll-behavior: smooth;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   background: var(--color-primary-dark);
   color: var(--color-white);
   font-family: "Inter", system-ui, sans-serif;
 }
 
-.app-container {
+#root {
   width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app-container {
+  width: min(100%, var(--container-wide));
   max-width: var(--container-wide);
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
@@ -140,4 +156,9 @@ body {
 
 .bg-deep-green {
   background: var(--color-deep-green);
+}
+
+main,
+section {
+  overflow-x: clip;
 }

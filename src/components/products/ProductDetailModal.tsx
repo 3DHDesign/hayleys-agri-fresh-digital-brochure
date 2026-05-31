@@ -18,8 +18,8 @@ const ProductDetailModal = ({ product, onClose }: ProductDetailModalProps) => {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
-      <div className="max-h-[90vh] w-full max-w-5xl overflow-y-auto rounded-[36px] bg-[#F7F2E8] p-6 text-[#102014] shadow-2xl md:p-8">
+    <div className="fixed inset-0 z-[100] flex w-full items-center justify-center overflow-x-hidden bg-black/60 p-4 backdrop-blur-sm">
+       <div className="max-h-[90vh] w-full max-w-[1024px] overflow-x-auto overflow-y-auto rounded-[36px] bg-[#F7F2E8] p-6 text-[#102014] shadow-2xl [scrollbar-width:none] md:p-8 [&::-webkit-scrollbar]:hidden">
         <div className="flex items-start justify-between gap-5">
           <div>
             <p className="text-xs font-black uppercase tracking-[0.22em] text-[#0B5D35]">
@@ -46,7 +46,7 @@ const ProductDetailModal = ({ product, onClose }: ProductDetailModalProps) => {
           </button>
         </div>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-4">
+        <div className="mt-8 grid min-w-0 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <div className="rounded-3xl bg-white p-5">
             <p className="text-xs font-bold uppercase text-black/40">UOM</p>
             <strong className="mt-2 block text-xl">{product.uom}</strong>
@@ -76,7 +76,7 @@ const ProductDetailModal = ({ product, onClose }: ProductDetailModalProps) => {
           </div>
         </div>
 
-        <div className="mt-6 grid gap-5 lg:grid-cols-2">
+        <div className="mt-6 grid min-w-0 gap-5 lg:grid-cols-2">
           <InfoPanel title="Quality Notes" items={product.qualityNotes} icon="check" />
 
           <InfoPanel
