@@ -6,6 +6,7 @@ import { useInquiry } from "../../context/InquiryContext";
 const navLinks = [
   { label: "Home", path: "/" },
   { label: "Products", path: "/products" },
+  { label: "Supermarket Supply", path: "/supermarket-supply" },
   { label: "HORECA Supply", path: "/horeca-supply" },
   { label: "Quality Standards", path: "/quality-standards" },
   { label: "Presentation", path: "/presentation" },

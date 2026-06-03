@@ -9,6 +9,7 @@ import Header from "./components/layout/Header";
 import { InquiryProvider } from "./context/InquiryContext";
 import Presentation from "./pages/Presentation";
 import "./App.css";
+import SupermarketSupply from "./pages/SupermarketSupply";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
-           
+          <Route path="/supermarket-supply" element={<SupermarketSupply />} />
           <Route path="/horeca-supply" element={<HorecaSupply />} />
           <Route path="/quality-standards" element={<QualityStandards />} />
           <Route path="/presentation" element={<Presentation />} />

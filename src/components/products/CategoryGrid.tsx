@@ -20,19 +20,22 @@ const CategoryGrid = () => {
       <div className="mx-auto w-full max-w-[1500px] px-6 lg:px-10">
         <div className="grid gap-12 xl:grid-cols-[0.85fr_1.35fr]">
           <div className="h-fit rounded-[36px] border border-black/10 bg-white/75 p-8 shadow-[0_30px_90px_rgba(16,32,20,0.08)] backdrop-blur xl:sticky xl:top-28">
-            <p className="text-xs font-black uppercase tracking-[0.28em] text-[#0B5D35]">
+            <p className="text-xs font-black uppercase tracking-[0.35em] text-[var(--color-deep-green)]">
               Product Portfolio
             </p>
 
-            <h2 className="mt-4 max-w-2xl text-[42px] font-black leading-[0.95] tracking-[-0.06em] md:text-[64px]">
-              A premium fresh produce range for Hayleys retail and food service.
-            </h2>
+            <p className="mt-5 text-sm font-black uppercase tracking-[0.22em] text-[var(--color-leaf-green)]">
+              Farm Fresh — Grown with Trust
+            </p>
+
+            <h1 className="mt-6 max-w-2xl text-4xl font-black leading-[1.02] tracking-[-0.04em] text-[var(--color-text-dark)] sm:text-5xl lg:text-[56px]">
+              A premium fresh produce range for retail and food service.
+            </h1>
 
             <p className="mt-6 max-w-xl text-base leading-8 text-black/60">
-              Explore Hayleys Agri Fresh’s complete produce portfolio covering
-              vegetables, fruits, herbs, specialty produce, and value-added
-              HORECA packs for Hayleys retail expansion, hotels, restaurants,
-              cafés, catering teams, and premium food service customers.
+              Explore Hayleys Agri Fresh’s complete produce portfolio covering vegetables,
+              fruits, herbs, specialty produce, and value-added HORECA packs for hotels,
+              restaurants, cafés, catering teams, and premium food service customers.
             </p>
 
             <div className="my-8 grid gap-3 sm:grid-cols-3">
@@ -78,9 +81,8 @@ const CategoryGrid = () => {
               <Link
                 key={category.id}
                 to={`/products?category=${encodeURIComponent(category.title)}`}
-                className={`group relative min-h-[300px] overflow-hidden rounded-[34px] bg-gradient-to-br p-6 text-white shadow-[0_24px_70px_rgba(16,32,20,0.16)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_34px_90px_rgba(16,32,20,0.26)] ${
-                  categoryThemes[index] || "from-[#0B5D35] to-[#102014]"
-                }`}
+                className={`group relative min-h-[300px] overflow-hidden rounded-[34px] bg-gradient-to-br p-6 text-white shadow-[0_24px_70px_rgba(16,32,20,0.16)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_34px_90px_rgba(16,32,20,0.26)] ${categoryThemes[index] || "from-[#0B5D35] to-[#102014]"
+                  }`}
               >
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.22),transparent_22%),radial-gradient(circle_at_80%_10%,rgba(215,168,75,0.22),transparent_24%),linear-gradient(135deg,rgba(255,255,255,0.08),transparent_50%)]" />
 
