@@ -1,10 +1,10 @@
 import { useMemo, useState } from "react";
+import { FiSearch } from "react-icons/fi";
 import ProductCard from "../components/products/ProductCard";
 import ProductDetailModal from "../components/products/ProductDetailModal";
 import { categories } from "../data/categories";
-import { products } from "../data/products";
+import { categorySpecifications, products } from "../data/products";
 import type { Product, ProductCategory } from "../types/product";
-import { FiSearch } from "react-icons/fi";
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState<
@@ -12,6 +12,9 @@ const Products = () => {
   >("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [activeProduct, setActiveProduct] = useState<Product | null>(null);
+
+  const selectedCategorySpecification =
+    selectedCategory === "All" ? null : categorySpecifications[selectedCategory];
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
@@ -35,7 +38,7 @@ const Products = () => {
         <section className="mx-auto w-full max-w-[1500px] px-6 py-12 lg:px-10">
           <div className="mb-10 flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.25em] text-[#0B5D35]">
+              <p className="text-xs font-black uppercase tracking-[0.25em] text-[var(--color-deep-green)]">
                 Smart Produce Catalogue
               </p>
 
@@ -46,12 +49,13 @@ const Products = () => {
 
             <div className="relative w-full max-w-md">
               <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-black/35" />
+
               <input
                 type="text"
                 placeholder="Search products, nutrition, categories..."
                 value={searchTerm}
                 onChange={(event) => setSearchTerm(event.target.value)}
-                className="w-full rounded-full border border-black/10 bg-white py-4 pl-12 pr-5 text-sm font-semibold outline-none transition focus:border-[#0B5D35]"
+                className="w-full rounded-full border border-black/10 bg-white py-4 pl-12 pr-5 text-sm font-semibold outline-none transition focus:border-[var(--color-deep-green)]"
               />
             </div>
           </div>
@@ -64,7 +68,7 @@ const Products = () => {
                 className={`mb-3 flex w-full items-center justify-between rounded-2xl px-4 py-3 text-left text-sm font-black transition ${
                   selectedCategory === "All"
                     ? "bg-[#102014] text-white"
-                    : "bg-[#F7F2E8] text-[#102014] hover:bg-[#0B5D35]/10"
+                    : "bg-[#F7F2E8] text-[#102014] hover:bg-[var(--color-deep-green)]/10"
                 }`}
               >
                 All Products
@@ -84,11 +88,11 @@ const Products = () => {
                       onClick={() => setSelectedCategory(category.title)}
                       className={`flex w-full items-center justify-between rounded-2xl px-4 py-3 text-left text-sm font-black transition ${
                         selectedCategory === category.title
-                          ? "bg-[#0B5D35] text-white"
-                          : "bg-[#F7F2E8] text-[#102014] hover:bg-[#0B5D35]/10"
+                          ? "bg-[var(--color-deep-green)] text-white"
+                          : "bg-[#F7F2E8] text-[#102014] hover:bg-[var(--color-deep-green)]/10"
                       }`}
                     >
-                      <span>{category.title}</span>
+                      {category.title}
                       <span>{count}</span>
                     </button>
                   );
@@ -97,35 +101,69 @@ const Products = () => {
             </aside>
 
             <div className="min-w-0">
-              <div className="mb-5 flex items-center justify-between gap-4">
-                <p className="text-sm font-bold text-black/50">
-                  Showing{" "}
-                  <span className="font-black text-[#102014]">
-                    {filteredProducts.length}
-                  </span>{" "}
-                  products
+              {selectedCategorySpecification && (
+                <section className="mb-10 rounded-[32px] border border-black/10 bg-white p-6 shadow-[0_24px_70px_rgba(16,32,20,0.08)] md:p-8">
+                  <p className="text-xs font-black uppercase tracking-[0.28em] text-[var(--color-deep-green)]">
+                    Category Specification
+                  </p>
+
+                  <h2 className="mt-3 text-3xl font-black leading-tight text-[var(--color-text-dark)]">
+                    {selectedCategorySpecification.title}
+                  </h2>
+
+                  <p className="mt-4 max-w-3xl text-sm leading-7 text-black/55">
+                    {selectedCategorySpecification.description}
+                  </p>
+
+                  <div className="mt-7 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                    {selectedCategorySpecification.specs.map((spec) => (
+                      <div
+                        key={spec.label}
+                        className="rounded-2xl border border-black/5 bg-[var(--color-cream)] px-4 py-4"
+                      >
+                        <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--color-deep-green)]">
+                          {spec.label}
+                        </p>
+
+                        <p className="mt-2 text-sm font-semibold leading-6 text-black/65">
+                          {spec.value}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-sm font-black uppercase tracking-[0.2em] text-black/45">
+                  {filteredProducts.length} Products Found
                 </p>
 
-                <p className="rounded-full bg-white px-4 py-2 text-xs font-black text-[#0B5D35]">
-                  {selectedCategory}
-                </p>
+                {selectedCategory !== "All" && (
+                  <p className="text-sm font-bold text-[var(--color-deep-green)]">
+                    Showing: {selectedCategory}
+                  </p>
+                )}
               </div>
 
-              <div className="grid min-w-0 gap-5 md:grid-cols-2 2xl:grid-cols-3">
-                {filteredProducts.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    product={product}
-                    onViewDetails={setActiveProduct}
-                  />
-                ))}
-              </div>
+              {filteredProducts.length > 0 ? (
+                <div className="grid min-w-0 gap-6 md:grid-cols-2 2xl:grid-cols-3">
+                  {filteredProducts.map((product) => (
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                      onViewDetails={setActiveProduct}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="rounded-[32px] bg-white p-10 text-center shadow-[0_18px_50px_rgba(16,32,20,0.08)]">
+                  <h2 className="text-2xl font-black text-[#102014]">
+                    No products found
+                  </h2>
 
-              {filteredProducts.length === 0 && (
-                <div className="rounded-[32px] bg-white p-10 text-center">
-                  <h3 className="text-2xl font-black">No products found</h3>
-                  <p className="mt-2 text-black/55">
-                    Try another category or search keyword.
+                  <p className="mt-3 text-sm font-semibold text-black/55">
+                    Try changing the category or search keyword.
                   </p>
                 </div>
               )}
@@ -134,10 +172,12 @@ const Products = () => {
         </section>
       </main>
 
-      <ProductDetailModal
-        product={activeProduct}
-        onClose={() => setActiveProduct(null)}
-      />
+      {activeProduct && (
+        <ProductDetailModal
+          product={activeProduct}
+          onClose={() => setActiveProduct(null)}
+        />
+      )}
     </>
   );
 };

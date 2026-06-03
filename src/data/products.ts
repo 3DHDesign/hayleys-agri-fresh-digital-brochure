@@ -1,5 +1,82 @@
 import type { Product } from "../types/product";
 
+export type CategorySpecification = {
+  title: string;
+  description: string;
+  specs: {
+    label: string;
+    value: string;
+  }[];
+};
+
+export const categorySpecifications: Record<string, CategorySpecification> = {
+  "Upcountry Vegetables": {
+    title: "Upcountry Vegetables Specification",
+    description:
+      "Premium high-elevation produce grown in cooler climates, suitable for retail, salads, Western cuisine, and high-end food service.",
+    specs: [
+      { label: "Grade", value: "Premium / Export Quality" },
+      { label: "Appearance", value: "Bright natural color, uniform size and shape" },
+      { label: "Freshness", value: "Recently harvested, firm and crisp" },
+      { label: "Texture", value: "Crunchy, non-fibrous" },
+      { label: "Cleanliness", value: "Well washed, minimal soil residue" },
+      { label: "Defects", value: "Free from pest damage, cuts, decay, and discoloration" },
+      { label: "Moisture", value: "Fresh, not dehydrated" },
+      { label: "Size Standardization", value: "Medium to large, variety dependent" },
+      { label: "Storage Temperature", value: "0–5°C" },
+      { label: "Shelf Life", value: "5–10 days under cold storage" },
+      { label: "Packaging", value: "Crates / Polybags / HORECA bulk packs, 5kg–25kg" },
+      { label: "UOM", value: "KG" },
+    ],
+  },
+
+  "Low Country Vegetables": {
+    title: "Low Country Vegetables Specification",
+    description:
+      "Fresh market-grade vegetables sourced from lowland growing regions, widely used in Sri Lankan cuisine and bulk food service.",
+    specs: [
+      { label: "Grade", value: "Fresh / Standard Market Grade" },
+      { label: "Appearance", value: "Natural color, variety-specific shape" },
+      { label: "Freshness", value: "Tender and recently harvested" },
+      { label: "Texture", value: "Firm but not over-mature or fibrous" },
+      { label: "Cleanliness", value: "Clean, minimal soil and debris" },
+      { label: "Defects", value: "Free from insect damage, over-ripeness, and decay" },
+      { label: "Maturity Level", value: "Harvested at optimal cooking stage" },
+      { label: "Size Standardization", value: "Medium, variety dependent" },
+      { label: "Storage Temperature", value: "8–15°C" },
+      { label: "Shelf Life", value: "3–7 days, depending on item" },
+      { label: "Packaging", value: "Sacks / Crates / HORECA bulk supply" },
+      { label: "UOM", value: "KG" },
+    ],
+  },
+
+  "Local Fruits": {
+    title: "Local Fruits Specification",
+    description:
+      "Fresh Sri Lankan fruits selected for retail shelves, hotel buffets, juice bars, desserts, and premium fruit displays.",
+    specs: [
+      { label: "Condition", value: "Fresh, mature, clean and firm" },
+      { label: "Defects", value: "Free from bruises, latex stains and pest damage" },
+      { label: "Color", value: "Green to yellow, variety dependent" },
+      { label: "Texture", value: "Firm to soft, depending on ripening stage" },
+      { label: "Storage", value: "12–14°C" },
+      { label: "UOM", value: "KG" },
+    ],
+  },
+
+  "Imported Fruits": {
+    title: "Imported Fruits Specification",
+    description:
+      "Premium imported and high-value fruits suitable for modern retail, hotels, restaurants, cafés, and HORECA requirements.",
+    specs: [
+      { label: "Grade", value: "Premium imported grade" },
+      { label: "Appearance", value: "Uniform size, color and finish" },
+      { label: "Storage", value: "0–4°C" },
+      { label: "UOM", value: "KG" },
+    ],
+  },
+};
+
 export const products: Product[] = [
   // Upcountry Vegetables
   {

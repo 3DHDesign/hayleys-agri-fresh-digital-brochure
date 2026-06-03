@@ -1,6 +1,7 @@
-import { FiX, FiPlus, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
-import type { Product } from "../../types/product";
+import { FiAlertCircle, FiCheckCircle, FiPlus, FiX } from "react-icons/fi";
 import { useInquiry } from "../../context/InquiryContext";
+import { categorySpecifications } from "../../data/products";
+import type { Product } from "../../types/product";
 
 type ProductDetailModalProps = {
   product: Product | null;
@@ -12,6 +13,8 @@ const ProductDetailModal = ({ product, onClose }: ProductDetailModalProps) => {
 
   if (!product) return null;
 
+  const categorySpecification = categorySpecifications[product.category];
+
   const handleAddToInquiry = () => {
     addToInquiry(product);
     onClose();
@@ -19,10 +22,10 @@ const ProductDetailModal = ({ product, onClose }: ProductDetailModalProps) => {
 
   return (
     <div className="fixed inset-0 z-[100] flex w-full items-center justify-center overflow-x-hidden bg-black/60 p-4 backdrop-blur-sm">
-       <div className="max-h-[90vh] w-full max-w-[1024px] overflow-x-auto overflow-y-auto rounded-[36px] bg-[#F7F2E8] p-6 text-[#102014] shadow-2xl [scrollbar-width:none] md:p-8 [&::-webkit-scrollbar]:hidden">
+      <div className="max-h-[90vh] w-full max-w-[1024px] overflow-x-auto overflow-y-auto rounded-[36px] bg-[#F7F2E8] p-6 text-[#102014] shadow-2xl [scrollbar-width:none] md:p-8 [&::-webkit-scrollbar]:hidden">
         <div className="flex items-start justify-between gap-5">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-[#0B5D35]">
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--color-deep-green)]">
               {product.category}
             </p>
 
@@ -40,44 +43,62 @@ const ProductDetailModal = ({ product, onClose }: ProductDetailModalProps) => {
           <button
             type="button"
             onClick={onClose}
-            className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white text-xl shadow-sm"
+            aria-label="Close product details"
+            className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white text-xl shadow-sm transition hover:bg-[var(--color-deep-green)] hover:text-white"
           >
             <FiX />
           </button>
         </div>
 
         <div className="mt-8 grid min-w-0 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          <div className="rounded-3xl bg-white p-5">
-            <p className="text-xs font-bold uppercase text-black/40">UOM</p>
-            <strong className="mt-2 block text-xl">{product.uom}</strong>
-          </div>
-
-          <div className="rounded-3xl bg-white p-5">
-            <p className="text-xs font-bold uppercase text-black/40">Storage</p>
-            <strong className="mt-2 block text-xl">
-              {product.storage || "Varies"}
-            </strong>
-          </div>
-
-          <div className="rounded-3xl bg-white p-5">
-            <p className="text-xs font-bold uppercase text-black/40">Origin</p>
-            <strong className="mt-2 block text-xl">
-              {product.origin || "N/A"}
-            </strong>
-          </div>
-
-          <div className="rounded-3xl bg-white p-5">
-            <p className="text-xs font-bold uppercase text-black/40">
-              Suitable For
-            </p>
-            <strong className="mt-2 block text-xl">
-              {product.suitableFor.join(", ")}
-            </strong>
-          </div>
+          <ProductMetaCard label="UOM" value={product.uom} />
+          <ProductMetaCard label="Storage" value={product.storage || "Varies"} />
+          <ProductMetaCard label="Origin" value={product.origin || "N/A"} />
+          <ProductMetaCard
+            label="Suitable For"
+            value={product.suitableFor.join(", ")}
+          />
         </div>
 
+        {categorySpecification && (
+          <section className="mt-6 rounded-3xl bg-white p-6">
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--color-deep-green)]">
+              Category Specification
+            </p>
+
+            <h3 className="mt-3 text-2xl font-black leading-tight text-[#102014]">
+              {categorySpecification.title}
+            </h3>
+
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-black/55">
+              {categorySpecification.description}
+            </p>
+
+            <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+              {categorySpecification.specs.map((spec) => (
+                <div
+                  key={spec.label}
+                  className="rounded-2xl border border-black/5 bg-[#F7F2E8] px-4 py-3"
+                >
+                  <p className="text-[11px] font-black uppercase tracking-[0.16em] text-[var(--color-deep-green)]">
+                    {spec.label}
+                  </p>
+
+                  <p className="mt-1.5 text-sm font-semibold leading-6 text-black/65">
+                    {spec.value}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         <div className="mt-6 grid min-w-0 gap-5 lg:grid-cols-2">
-          <InfoPanel title="Quality Notes" items={product.qualityNotes} icon="check" />
+          <InfoPanel
+            title="Quality Notes"
+            items={product.qualityNotes}
+            icon="check"
+          />
 
           <InfoPanel
             title="Nutrition Highlights"
@@ -103,7 +124,7 @@ const ProductDetailModal = ({ product, onClose }: ProductDetailModalProps) => {
           />
         </div>
 
-        {product.bestFor && (
+        {product.bestFor && product.bestFor.length > 0 && (
           <div className="mt-6 rounded-3xl bg-white p-6">
             <h3 className="text-xl font-black">Best For</h3>
 
@@ -111,7 +132,7 @@ const ProductDetailModal = ({ product, onClose }: ProductDetailModalProps) => {
               {product.bestFor.map((item) => (
                 <span
                   key={item}
-                  className="rounded-full bg-[#0B5D35]/10 px-4 py-2 text-sm font-bold text-[#0B5D35]"
+                  className="rounded-full bg-[var(--color-deep-green)]/10 px-4 py-2 text-sm font-bold text-[var(--color-deep-green)]"
                 >
                   {item}
                 </span>
@@ -122,7 +143,10 @@ const ProductDetailModal = ({ product, onClose }: ProductDetailModalProps) => {
 
         <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-3xl bg-[#102014] p-5 text-white">
           <div>
-            <p className="text-sm font-semibold text-white/60">Inquiry Basket</p>
+            <p className="text-sm font-semibold text-white/60">
+              Inquiry Basket
+            </p>
+
             <h3 className="text-2xl font-black">
               Add this product to client inquiry
             </h3>
@@ -131,13 +155,28 @@ const ProductDetailModal = ({ product, onClose }: ProductDetailModalProps) => {
           <button
             type="button"
             onClick={handleAddToInquiry}
-            className="inline-flex items-center gap-3 rounded-full bg-[#D7A84B] px-6 py-4 text-sm font-black text-[#102014]"
+            className="inline-flex items-center gap-3 rounded-full bg-[var(--color-fresh-green)] px-6 py-4 text-sm font-black text-[#102014] transition hover:bg-[var(--color-lime-green)]"
           >
             <FiPlus />
             Add to Inquiry
           </button>
         </div>
       </div>
+    </div>
+  );
+};
+
+const ProductMetaCard = ({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) => {
+  return (
+    <div className="rounded-3xl bg-white p-5">
+      <p className="text-xs font-bold uppercase text-black/40">{label}</p>
+      <strong className="mt-2 block text-xl">{value}</strong>
     </div>
   );
 };
@@ -155,13 +194,16 @@ const InfoPanel = ({
     <div className="rounded-3xl bg-white p-6">
       <h3 className="text-xl font-black">{title}</h3>
 
-      <div className="mt-4 space-y-3">
+      <div className="mt-5 space-y-4">
         {items.map((item) => (
-          <div key={item} className="flex gap-3 text-sm leading-6 text-black/65">
+          <div
+            key={item}
+            className="flex items-start gap-3 text-sm leading-6 text-black/65"
+          >
             {icon === "check" ? (
-              <FiCheckCircle className="mt-1 shrink-0 text-[#0B5D35]" />
+              <FiCheckCircle className="mt-1 shrink-0 text-[var(--color-deep-green)]" />
             ) : (
-              <FiAlertCircle className="mt-1 shrink-0 text-[#D7A84B]" />
+              <FiAlertCircle className="mt-1 shrink-0 text-[var(--color-gold)]" />
             )}
 
             <span>{item}</span>
