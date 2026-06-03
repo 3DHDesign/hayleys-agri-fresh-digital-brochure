@@ -54,7 +54,7 @@ export const categories: CategoryItem[] = [
     id: 8,
     title: "Exotic & Specialty Produce",
     description: "Specialty items including zucchini, cherry tomato, mushrooms, and salad produce.",
-    image: "/images/categories/exotic.jpg",
+    image: "/images/categories/upcountry.jpg",
   },
   {
     id: 9,
