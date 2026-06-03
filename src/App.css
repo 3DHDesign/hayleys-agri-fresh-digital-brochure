@@ -1,16 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --color-primary-dark: #07150d;
-  --color-secondary-dark: #0b1f14;
-  --color-deep-green: #0b5d35;
-  --color-fresh-green: #9be15d;
-  --color-soft-green: #b9dcc8;
-  --color-gold: #d7a84b;
-  --color-gold-hover: #e7bb60;
-  --color-cream: #f7f2e8;
+  /* Logo-based brand colors */
+  --color-primary-dark: #052b16;
+  --color-secondary-dark: #08361d;
+  --color-deep-green: #006b2d;
+  --color-leaf-green: #3f8f24;
+  --color-fresh-green: #86c63f;
+  --color-lime-green: #9bd13d;
+  --color-soft-green: #d8efc6;
+
+  /* Accent from logo brown dots */
+  --color-gold: #a9792b;
+  --color-gold-hover: #bf8b35;
+
+  /* Background / text */
+  --color-cream: #f7f8ef;
   --color-white: #ffffff;
-  --color-text-dark: #102014;
+  --color-text-dark: #062515;
 
   --container-wide: 1500px;
   --header-height: 80px;
@@ -59,9 +66,9 @@ body {
 }
 
 .header-glass {
-  background: rgba(11, 31, 20, 0.86);
+  background: rgba(5, 43, 22, 0.9);
   backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(155, 209, 61, 0.18);
 }
 
 .btn-primary {
@@ -70,7 +77,7 @@ body {
   justify-content: center;
   gap: 0.75rem;
   border-radius: 999px;
-  background: var(--color-gold);
+  background: var(--color-fresh-green);
   color: var(--color-text-dark);
   padding: 1rem 1.75rem;
   font-size: 0.875rem;
@@ -80,7 +87,7 @@ body {
 }
 
 .btn-primary:hover {
-  background: var(--color-gold-hover);
+  background: var(--color-lime-green);
   transform: translateY(-1px);
 }
 
@@ -164,11 +171,11 @@ section {
 }
 
 .page {
-  background: #f7f2e8;
+  background: var(--color-cream);
   border-radius: 1rem;
   overflow: hidden;
 }
 
 .cover-page {
-  background: #f7f2e8;
+  background: var(--color-cream);
 }

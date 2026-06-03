@@ -1,5 +1,5 @@
  
-import HeroSection from "../components/home/HeroSection";
+// import HeroSection from "../components/home/HeroSection";
 import CategoryGrid from "../components/products/CategoryGrid";
 
 const Home = () => {
@@ -7,7 +7,7 @@ const Home = () => {
     <>
       
       <main>
-        <HeroSection />
+        {/* <HeroSection /> */}
         <CategoryGrid />
       </main>
     </>
