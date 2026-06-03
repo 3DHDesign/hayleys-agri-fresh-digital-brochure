@@ -1,43 +1,46 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { FiMenu, FiSearch, FiShoppingBag } from "react-icons/fi";
+import { FiMenu, FiSearch, FiShoppingBag, FiX } from "react-icons/fi";
 import { useInquiry } from "../../context/InquiryContext";
 
 const navLinks = [
   { label: "Home", path: "/" },
   { label: "Products", path: "/products" },
- 
   { label: "HORECA Supply", path: "/horeca-supply" },
   { label: "Quality Standards", path: "/quality-standards" },
   { label: "Presentation", path: "/presentation" },
-  { label: "Inquiry", path: "/inquiry" },
 ];
 
 const Header = () => {
   const { totalItems } = useInquiry();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <header className="header-glass fixed left-0 top-0 z-50 w-full">
       <div className="app-container flex h-20 items-center justify-between">
-        <NavLink to="/" className="flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-lg font-black text-[var(--color-deep-green)]">
-            HA
-          </div>
-
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--color-soft-green)]">
-              Hayleys
-            </p>
-            <h1 className="text-lg font-bold text-white">Agri Fresh</h1>
-          </div>
+        <NavLink
+          to="/"
+          onClick={closeMobileMenu}
+          className="flex items-center rounded-2xl bg-white px-3 py-2 shadow-[0_10px_30px_rgba(0,0,0,0.12)]"
+        >
+          <img
+            src="/logosite.jpg"
+            alt="Hayleys Agri Fresh"
+            className="h-11 w-auto object-contain sm:h-12"
+          />
         </NavLink>
 
-        <nav className="hidden items-center gap-1 xl:flex">
+        <nav className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => (
             <NavLink
               key={link.path}
               to={link.path}
               className={({ isActive }) =>
-                `rounded-full px-4 py-2 text-sm font-medium transition ${
+                `rounded-full px-3 py-2 text-sm font-medium transition xl:px-4 ${
                   isActive
                     ? "bg-white text-[var(--color-deep-green)]"
                     : "text-white/75 hover:bg-white/10 hover:text-white"
@@ -52,6 +55,7 @@ const Header = () => {
         <div className="flex items-center gap-3">
           <button
             type="button"
+            aria-label="Search"
             className="hidden h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/80 transition hover:bg-white/10 md:flex"
           >
             <FiSearch />
@@ -59,10 +63,11 @@ const Header = () => {
 
           <NavLink
             to="/inquiry"
-            className="btn-primary hidden !px-5 !py-3 md:flex"
+            className="btn-primary hidden !px-4 !py-3 md:flex xl:!px-5"
           >
             <FiShoppingBag />
-            Inquiry Basket
+            <span className="hidden xl:inline">Inquiry Basket</span>
+            <span className="xl:hidden">Inquiry</span>
 
             {totalItems > 0 && (
               <span className="grid h-6 w-6 place-items-center rounded-full bg-[#102014] text-xs text-white">
@@ -73,12 +78,51 @@ const Header = () => {
 
           <button
             type="button"
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white xl:hidden"
+            aria-label="Toggle mobile menu"
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white transition hover:bg-white/10 lg:hidden"
           >
-            <FiMenu />
+            {isMobileMenuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
           </button>
         </div>
       </div>
+
+      {isMobileMenuOpen && (
+        <div className="border-t border-white/10 bg-[#062515]/95 px-4 py-4 shadow-2xl backdrop-blur-xl lg:hidden">
+          <nav className="mx-auto flex max-w-[92rem] flex-col gap-2">
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.path}
+                to={link.path}
+                onClick={closeMobileMenu}
+                className={({ isActive }) =>
+                  `rounded-2xl px-4 py-3 text-sm font-semibold transition ${
+                    isActive
+                      ? "bg-white text-[var(--color-deep-green)]"
+                      : "text-white/80 hover:bg-white/10 hover:text-white"
+                  }`
+                }
+              >
+                {link.label}
+              </NavLink>
+            ))}
+
+            <NavLink
+              to="/inquiry"
+              onClick={closeMobileMenu}
+              className="mt-2 flex items-center justify-center gap-2 rounded-2xl bg-[#E5B84B] px-4 py-3 text-sm font-bold text-[#082817]"
+            >
+              <FiShoppingBag />
+              Inquiry Basket
+              {totalItems > 0 && (
+                <span className="grid h-6 w-6 place-items-center rounded-full bg-[#102014] text-xs text-white">
+                  {totalItems}
+                </span>
+              )}
+            </NavLink>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
