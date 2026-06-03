@@ -9,6 +9,8 @@ export type CategorySpecification = {
   }[];
 };
 
+
+
 export const categorySpecifications: Record<string, CategorySpecification> = {
   "Upcountry Vegetables": {
     title: "Upcountry Vegetables Specification",
@@ -90,6 +92,7 @@ export const products: Product[] = [
     origin: "Local / Imported",
     uom: "KG",
     storage: "0–5°C",
+    videoUrl: "https://www.youtube.com/watch?v=mcW9bQd8YuY",
     qualityNotes: [
       "Fresh, clean and firm",
       "Free from insect bites",

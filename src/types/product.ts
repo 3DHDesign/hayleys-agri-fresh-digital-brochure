@@ -21,14 +21,16 @@ export type Product = {
   name: string;
   sinhalaName?: string;
   category: ProductCategory;
-  image: string;
-  suitableFor: ProductSuitability[];
-  origin?: ProductOrigin;
-  uom: ProductUom;
+  image?: string;
+  suitableFor: string[];
+  origin?: string;
+  uom: string;
   storage?: string;
   qualityNotes: string[];
   nutritionHighlights: string[];
   wellnessSupport: string[];
   useWithCare?: string[];
   bestFor?: string[];
+
+  videoUrl?: string;
 };

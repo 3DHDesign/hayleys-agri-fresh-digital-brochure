@@ -88,36 +88,15 @@ const Inquiry = () => {
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <div className="flex items-center rounded-full bg-[#F7F2E8] p-1">
-                        <button
-                          type="button"
-                          onClick={() =>
-                            updateQuantity(item.product.id, item.quantity - 1)
-                          }
-                          className="grid h-10 w-10 place-items-center rounded-full bg-white text-[#102014]"
-                        >
-                          <FiMinus />
-                        </button>
-
-                        <span className="grid h-10 min-w-12 place-items-center px-3 text-sm font-black">
-                          {item.quantity}
-                        </span>
-
-                        <button
-                          type="button"
-                          onClick={() =>
-                            updateQuantity(item.product.id, item.quantity + 1)
-                          }
-                          className="grid h-10 w-10 place-items-center rounded-full bg-white text-[#102014]"
-                        >
-                          <FiPlus />
-                        </button>
-                      </div>
+                      <span className="rounded-full bg-[var(--color-deep-green)]/10 px-4 py-2 text-sm font-black text-[var(--color-deep-green)]">
+                        Selected
+                      </span>
 
                       <button
                         type="button"
                         onClick={() => removeFromInquiry(item.product.id)}
-                        className="grid h-12 w-12 place-items-center rounded-full bg-red-50 text-red-600"
+                        className="grid h-12 w-12 place-items-center rounded-full bg-red-50 text-red-500 transition hover:bg-red-100"
+                        aria-label={`Remove ${item.product.name} from inquiry`}
                       >
                         <FiTrash2 />
                       </button>

@@ -1,4 +1,11 @@
-import { FiAlertCircle, FiCheckCircle, FiPlus, FiX } from "react-icons/fi";
+import {
+  FiAlertCircle,
+  FiCheckCircle,
+  FiExternalLink,
+  FiPlayCircle,
+  FiPlus,
+  FiX,
+} from "react-icons/fi";
 import { useInquiry } from "../../context/InquiryContext";
 import { categorySpecifications } from "../../data/products";
 import type { Product } from "../../types/product";
@@ -18,6 +25,13 @@ const ProductDetailModal = ({ product, onClose }: ProductDetailModalProps) => {
   const handleAddToInquiry = () => {
     addToInquiry(product);
     onClose();
+  };
+
+  const getYouTubeEmbedUrl = (url: string) => {
+    const videoId =
+      url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&?/]+)/)?.[1] ?? "";
+  
+    return videoId ? `https://www.youtube.com/embed/${videoId}` : "";
   };
 
   return (
@@ -59,6 +73,50 @@ const ProductDetailModal = ({ product, onClose }: ProductDetailModalProps) => {
             value={product.suitableFor.join(", ")}
           />
         </div>
+
+        {product.videoUrl && (
+  <section className="mt-6 overflow-hidden rounded-3xl bg-[#102014] text-white">
+    <div className="grid gap-0 lg:grid-cols-[1.35fr_0.65fr]">
+      <div className="relative aspect-video w-full overflow-hidden bg-black">
+        <iframe
+          src={getYouTubeEmbedUrl(product.videoUrl)}
+          title={`${product.name} product video`}
+          className="absolute inset-0 h-full w-full"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        />
+      </div>
+
+      <div className="flex flex-col justify-center p-6 lg:p-8">
+        <div className="mb-5 grid h-12 w-12 place-items-center rounded-2xl bg-[var(--color-fresh-green)] text-xl text-[#102014]">
+          <FiPlayCircle />
+        </div>
+
+        <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--color-fresh-green)]">
+          Product Video
+        </p>
+
+        <h3 className="mt-3 text-2xl font-black leading-tight">
+          Watch {product.name} harvesting / sourcing video
+        </h3>
+
+        <p className="mt-3 text-sm leading-6 text-white/60">
+          View the related product video directly inside the catalogue.
+        </p>
+
+        <a
+          href={product.videoUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-6 inline-flex w-fit items-center justify-center gap-3 rounded-full bg-[var(--color-fresh-green)] px-6 py-4 text-sm font-black text-[#102014] transition hover:bg-[var(--color-lime-green)]"
+        >
+          Open YouTube
+          <FiExternalLink />
+        </a>
+      </div>
+    </div>
+  </section>
+)}
 
         {categorySpecification && (
           <section className="mt-6 rounded-3xl bg-white p-6">
