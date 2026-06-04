@@ -1,9 +1,9 @@
-import { FiMinus, FiPlus, FiTrash2, FiSend } from "react-icons/fi";
+import {  FiTrash2, FiSend } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useInquiry } from "../context/InquiryContext";
 
 const Inquiry = () => {
-  const { items, removeFromInquiry, updateQuantity, clearInquiry, totalItems } =
+  const { items, removeFromInquiry, clearInquiry, totalItems } =
     useInquiry();
 
   return (

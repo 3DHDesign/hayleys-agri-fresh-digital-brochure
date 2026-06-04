@@ -9,7 +9,7 @@ const navLinks = [
   { label: "Supermarket Supply", path: "/supermarket-supply" },
   { label: "HORECA Supply", path: "/horeca-supply" },
   { label: "Quality Standards", path: "/quality-standards" },
-  { label: "Presentation", path: "/presentation" },
+  // { label: "Presentation", path: "/presentation" },
 ];
 
 const Header = () => {
