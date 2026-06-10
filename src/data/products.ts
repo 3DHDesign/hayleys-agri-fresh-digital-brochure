@@ -84,7 +84,7 @@ export const products: Product[] = [
   {
     id: 1,
     slug: "carrot",
-    name: "Carrot",
+    name: "Carrots",
     sinhalaName: "කැරට්",
     category: "Upcountry Vegetables",
     image: "/images/products/carrot.jpg",
@@ -177,7 +177,7 @@ export const products: Product[] = [
   {
     id: 4,
     slug: "brinjal",
-    name: "Brinjal",
+    name: "Brinjals",
     sinhalaName: "වම්බටු",
     category: "Low Country Vegetables",
     image: "/images/products/brinjal.png",
@@ -237,7 +237,7 @@ export const products: Product[] = [
   },
   {
     id: 6,
-    slug: "okra",
+    slug: "okras",
     name: "Okra",
     sinhalaName: "බණ්ඩක්කා",
     category: "Low Country Vegetables",
@@ -395,7 +395,7 @@ export const products: Product[] = [
   {
     id: 11,
     slug: "sweet-potato",
-    name: "Sweet Potato",
+    name: "Sweet Potatos",
     sinhalaName: "බතල",
     category: "Roots & Tubers",
     image: "/images/products/sweet-potato.png",
@@ -426,7 +426,7 @@ export const products: Product[] = [
   {
     id: 12,
     slug: "beetroot",
-    name: "Beetroot",
+    name: "Beetroots",
     sinhalaName: "බීට්රූට්",
     category: "Roots & Tubers",
     image: "/images/products/beetroot.png",
