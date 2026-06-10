@@ -237,8 +237,8 @@ export const products: Product[] = [
   },
   {
     id: 6,
-    slug: "okras",
-    name: "Okra",
+    slug: "okra",
+    name: "Okras",
     sinhalaName: "බණ්ඩක්කා",
     category: "Low Country Vegetables",
     image: "/images/products/okra.png",
@@ -363,7 +363,7 @@ export const products: Product[] = [
   {
     id: 10,
     slug: "potato",
-    name: "Potato",
+    name: "Potatos",
     sinhalaName: "අල",
     category: "Roots & Tubers",
     image: "/images/products/potato.png",
